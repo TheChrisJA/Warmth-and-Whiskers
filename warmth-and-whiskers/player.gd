@@ -9,7 +9,8 @@ func _ready():
 	nav_agent.path_desired_distance = 4.0
 	nav_agent.target_desired_distance = 4.0
 
-func _input(event: InputEvent) -> void:
+# Change _input to _unhandled_input
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		set_movement_target(get_global_mouse_position())
 
