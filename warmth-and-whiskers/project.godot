@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Warmth and Whiskers"
+run/main_scene="uid://b6mp3al44p3b6"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -18,10 +19,6 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=640
 window/size/viewport_height=480
-window/size/always_on_top=true
-window/size/window_width_override=1920
-window/size/window_height_override=1080
-window/stretch/scale_mode="integer"
 
 [physics]
 
