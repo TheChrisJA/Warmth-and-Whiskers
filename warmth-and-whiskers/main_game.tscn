@@ -131,6 +131,7 @@ metadata/_edit_horizontal_guides_ = [-156.0]
 [node name="Levels" type="Node2D" parent="World" unique_id=703755187]
 position = Vector2(-334, -128)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="World/Levels" unique_id=1147118516]
 z_index = 2
@@ -159,49 +160,21 @@ tile_map_data = PackedByteArray("AAACAPv/AAAEAAQAAAACAPz/AAAEAAQAAAABAP3/AAAEAAQ
 tile_set = SubResource("TileSet_6bm6p")
 
 [node name="Area2D" type="Area2D" parent="World/Levels" unique_id=468480454]
+position = Vector2(-79, 95)
 script = ExtResource("2_aomqu")
 inventory_icon = ExtResource("11_02kkc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Levels/Area2D" unique_id=1205493050]
-position = Vector2(-124.5, 103)
 scale = Vector2(18.359997, 18.359997)
 shape = SubResource("RectangleShape2D_02kkc")
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="World/Levels/Area2D" unique_id=1129958092]
 z_index = 2
 texture_filter = 1
-position = Vector2(-124.5, 103)
+position = Vector2(0, 1)
 texture = ExtResource("11_02kkc")
-
-[node name="Area2D2" type="Area2D" parent="World/Levels" unique_id=618031755]
-script = ExtResource("2_aomqu")
-inventory_icon = ExtResource("11_02kkc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Levels/Area2D2" unique_id=1556678831]
-position = Vector2(30.5, 88)
-scale = Vector2(18.359997, 18.359997)
-shape = SubResource("RectangleShape2D_02kkc")
-
-[node name="Sprite2D" type="Sprite2D" parent="World/Levels/Area2D2" unique_id=726492510]
-z_index = 2
-texture_filter = 1
-position = Vector2(30.5, 88)
-texture = ExtResource("11_02kkc")
-
-[node name="Area2D3" type="Area2D" parent="World/Levels" unique_id=742261526]
-script = ExtResource("2_aomqu")
-inventory_icon = ExtResource("11_02kkc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Levels/Area2D3" unique_id=1358164209]
-position = Vector2(-34, 72)
-scale = Vector2(18.359997, 18.359997)
-shape = SubResource("RectangleShape2D_02kkc")
-
-[node name="Sprite2D" type="Sprite2D" parent="World/Levels/Area2D3" unique_id=206180099]
-z_index = 2
-texture_filter = 1
-position = Vector2(-34, 72)
-texture = ExtResource("11_02kkc")
+metadata/_edit_lock_ = true
 
 [node name="Entities" type="Node2D" parent="World" unique_id=1590512556]
 position = Vector2(49, -14)
@@ -577,8 +550,6 @@ offset_right = -122.0
 offset_bottom = 70.0
 
 [connection signal="input_event" from="World/Levels/Area2D" to="World/Levels/Area2D" method="_on_input_event"]
-[connection signal="input_event" from="World/Levels/Area2D2" to="World/Levels/Area2D2" method="_on_input_event"]
-[connection signal="input_event" from="World/Levels/Area2D3" to="World/Levels/Area2D3" method="_on_input_event"]
 [connection signal="timeout" from="Systems/SpawnManager/Cat/Timer" to="Systems/SpawnManager/Cat" method="_on_timer_timeout"]
 [connection signal="gui_input" from="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot" to="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot" method="_on_gui_input"]
 [connection signal="gui_input" from="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot2" to="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot2" method="_on_gui_input"]
