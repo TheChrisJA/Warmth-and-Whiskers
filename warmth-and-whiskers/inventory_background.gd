@@ -6,8 +6,6 @@ extends NinePatchRect
 var current_selected_index := -1
 var inventoryindex = 0
 
-# Reference to the placement script (adjust the path to match your scene tree)  # Example path
-
 func _ready():
 	# Connect slots
 	for slot in grid.get_children():
@@ -16,6 +14,7 @@ func _ready():
 	# Connect to the placement script's signal if it exists
 	if InventorySystem:
 		InventorySystem.item_placed_successfully.connect(_on_item_placed)
+		InventorySystem.item_moved.connect(_on_item_moved)   # new connection
 	
 	cursor.hide()
 
@@ -37,8 +36,12 @@ func update_cursor_position(index):
 	var slot_center = target_slot.global_position + (target_slot.size / 2.0)
 	cursor.global_position = slot_center - (cursor.size / 2.0)
 
-# Called when an item is successfully placed into the world
 func _on_item_placed():
+	cursor.hide()
+	current_selected_index = -1
+
+# new handler: when items are moved, hide the cursor
+func _on_item_moved(from_slot, to_slot):
 	cursor.hide()
 	current_selected_index = -1
 
