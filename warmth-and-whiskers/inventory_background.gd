@@ -4,6 +4,7 @@ extends NinePatchRect
 @onready var cursor = %SelectorCursor
 
 var current_selected_index := -1
+var inventoryindex = 0
 
 # Reference to the placement script (adjust the path to match your scene tree)  # Example path
 
@@ -23,9 +24,13 @@ func _on_slot_clicked(index):
 		cursor.hide()
 		current_selected_index = -1
 	else:
-		update_cursor_position(index)
-		cursor.show()
-		current_selected_index = index
+		# Compare with the currently active slot's index
+		if InventorySystem and InventorySystem.active_slot:
+			var active_index = InventorySystem.active_slot.get_index()
+			if index == active_index:
+				update_cursor_position(index)
+				cursor.show()
+				current_selected_index = index
 
 func update_cursor_position(index):
 	var target_slot = grid.get_child(index)
