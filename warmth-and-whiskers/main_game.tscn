@@ -160,7 +160,7 @@ tile_map_data = PackedByteArray("AAACAPv/AAAEAAQAAAACAPz/AAAEAAQAAAABAP3/AAAEAAQ
 tile_set = SubResource("TileSet_6bm6p")
 
 [node name="Area2D" type="Area2D" parent="World/Levels" unique_id=468480454]
-position = Vector2(-79, 95)
+position = Vector2(-84, 95)
 script = ExtResource("2_aomqu")
 inventory_icon = ExtResource("11_02kkc")
 item_name = "Heart"
@@ -171,6 +171,42 @@ shape = SubResource("RectangleShape2D_02kkc")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="World/Levels/Area2D" unique_id=1129958092]
+z_index = 2
+texture_filter = 1
+position = Vector2(0, 1)
+texture = ExtResource("11_02kkc")
+metadata/_edit_lock_ = true
+
+[node name="Area2D2" type="Area2D" parent="World/Levels" unique_id=262335091]
+position = Vector2(-10, 122)
+script = ExtResource("2_aomqu")
+inventory_icon = ExtResource("11_02kkc")
+item_name = "Heart"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Levels/Area2D2" unique_id=77085583]
+scale = Vector2(18.359997, 18.359997)
+shape = SubResource("RectangleShape2D_02kkc")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Levels/Area2D2" unique_id=317184156]
+z_index = 2
+texture_filter = 1
+position = Vector2(0, 1)
+texture = ExtResource("11_02kkc")
+metadata/_edit_lock_ = true
+
+[node name="Area2D3" type="Area2D" parent="World/Levels" unique_id=3868759]
+position = Vector2(-14, 78)
+script = ExtResource("2_aomqu")
+inventory_icon = ExtResource("11_02kkc")
+item_name = "Heart"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Levels/Area2D3" unique_id=1193965297]
+scale = Vector2(18.359997, 18.359997)
+shape = SubResource("RectangleShape2D_02kkc")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Levels/Area2D3" unique_id=375763694]
 z_index = 2
 texture_filter = 1
 position = Vector2(0, 1)
@@ -553,6 +589,8 @@ offset_right = -122.0
 offset_bottom = 70.0
 
 [connection signal="input_event" from="World/Levels/Area2D" to="World/Levels/Area2D" method="_on_input_event"]
+[connection signal="input_event" from="World/Levels/Area2D2" to="World/Levels/Area2D2" method="_on_input_event"]
+[connection signal="input_event" from="World/Levels/Area2D3" to="World/Levels/Area2D3" method="_on_input_event"]
 [connection signal="timeout" from="Systems/SpawnManager/Cat/Timer" to="Systems/SpawnManager/Cat" method="_on_timer_timeout"]
 [connection signal="gui_input" from="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot" to="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot" method="_on_gui_input"]
 [connection signal="gui_input" from="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot2" to="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot2" method="_on_gui_input"]
