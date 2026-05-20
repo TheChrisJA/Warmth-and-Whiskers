@@ -163,6 +163,7 @@ tile_set = SubResource("TileSet_6bm6p")
 position = Vector2(-79, 95)
 script = ExtResource("2_aomqu")
 inventory_icon = ExtResource("11_02kkc")
+item_name = "Heart"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Levels/Area2D" unique_id=1205493050]
 scale = Vector2(18.359997, 18.359997)
@@ -505,12 +506,14 @@ stretch_mode = 5
 metadata/_edit_lock_ = true
 
 [node name="SelectorCursor" type="TextureRect" parent="HudLayerCanvas/HudRoot/InventoryBackground" unique_id=1968707035]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
 offset_right = 53.0
 offset_bottom = 54.0
+mouse_filter = 2
 texture = ExtResource("8_l5ukw")
 stretch_mode = 4
 metadata/_edit_lock_ = true

@@ -1,25 +1,22 @@
 extends Area2D
 
 @export var inventory_icon: Texture2D 
+@export var item_name: String = "Unnamed Item" # Added item name property
 
 const SAVE_PATH = "user://saved_area.tscn"
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		# Find the player in the scene. (Adjust this path if your player is located elsewhere)
 		var player = get_node("/root/MainGame/Systems/SpawnManager/Player")
 		
 		if player:
-			# Tell the player to walk toward this item
 			player.target_item = self
 			player.set_movement_target(global_position)
-			
-			# Stop the input from passing through to the ground under the item
 			get_viewport().set_input_as_handled()
 
-# This is called automatically by the player script when they get close enough!
 func interact(player_node: CharacterBody2D) -> void:
-	var was_picked_up = InventorySystem.add_item(inventory_icon)
+	# Pass both the texture AND the name to the InventorySystem
+	var was_picked_up = InventorySystem.add_item(inventory_icon, item_name)
 	
 	if was_picked_up:
 		save_area(self)
