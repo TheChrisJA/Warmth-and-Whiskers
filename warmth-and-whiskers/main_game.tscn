@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://8tcvwwy1jta7" path="res://area_2d.gd" id="2_aomqu"]
 [ext_resource type="Texture2D" uid="uid://dvxrulned2y7e" path="res://testcharacter.png" id="3_dugkq"]
 [ext_resource type="Script" uid="uid://djsije4egnnj4" path="res://cat.gd" id="4_dugkq"]
+[ext_resource type="Script" uid="uid://ctss7ursi8trq" path="res://area_2d_4.gd" id="4_krmtw"]
 [ext_resource type="Texture2D" uid="uid://sfckl4lgtlnt" path="res://cattest.png" id="5_2pltu"]
 [ext_resource type="Texture2D" uid="uid://fmqtcwbgu2ay" path="res://inventory_Light.png" id="6_02kkc"]
 [ext_resource type="Script" uid="uid://duypqrrxq8fea" path="res://inventory_background.gd" id="7_4srsv"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://nluoy2ddswy" path="res://BrownInvenSelect.png" id="8_l5ukw"]
 [ext_resource type="Script" uid="uid://ccp2r2tg0xvnf" path="res://inventory_slot.gd" id="9_mf81u"]
 [ext_resource type="Texture2D" uid="uid://cwf8jsgevf71e" path="res://Inventory_Herat_.png" id="11_02kkc"]
+[ext_resource type="Script" uid="uid://dvk66at7xsdn6" path="res://label.gd" id="14_jgkyn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ykeeq"]
 texture = ExtResource("1_ykeeq")
@@ -117,6 +119,21 @@ agent_radius = 4.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02kkc"]
 size = Vector2(1.4161224, 1.30719)
 
+[sub_resource type="Gradient" id="Gradient_aomqu"]
+offsets = PackedFloat32Array(0, 0.060240965, 0.7710843)
+colors = PackedColorArray(0.9578313, 0.9578313, 0.9578313, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_krmtw"]
+gradient = SubResource("Gradient_aomqu")
+width = 88
+height = 88
+fill = 1
+fill_from = Vector2(0.23913045, 0.50434786)
+fill_to = Vector2(0.90000004, 0.50869566)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jgkyn"]
+radius = 65.03076
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_l5ukw"]
 radius = 3.0
 
@@ -142,6 +159,7 @@ tile_map_data = PackedByteArray("AAD9/xMAAAABAAMAAAD+/xMAAAABAAMAAAD+/xQAAAABAAM
 tile_set = SubResource("TileSet_6bm6p")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="World/Levels/TileMapLayer" unique_id=657185464]
+visible = false
 position = Vector2(-1, -1)
 navigation_polygon = SubResource("NavigationPolygon_6bm6p")
 
@@ -213,6 +231,27 @@ position = Vector2(0, 1)
 texture = ExtResource("11_02kkc")
 metadata/_edit_lock_ = true
 
+[node name="Area2D4" type="Area2D" parent="World/Levels" unique_id=578655669]
+z_index = 1
+position = Vector2(-129, 78)
+priority = 1
+script = ExtResource("4_krmtw")
+
+[node name="PointLight2D" type="PointLight2D" parent="World/Levels/Area2D4" unique_id=1357304790]
+z_index = 3
+position = Vector2(27.660736, 52.672882)
+rotation = 1.1052061
+scale = Vector2(1.4772472, -0.8031791)
+color = Color(0.7854915, 0.3042909, 0, 1)
+energy = 1.59
+texture = SubResource("GradientTexture2D_krmtw")
+texture_scale = 0.98
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Levels/Area2D4" unique_id=1274332411]
+z_index = 1
+position = Vector2(10, 20)
+shape = SubResource("CircleShape2D_jgkyn")
+
 [node name="Entities" type="Node2D" parent="World" unique_id=1590512556]
 position = Vector2(49, -14)
 
@@ -227,13 +266,13 @@ motion_mode = 1
 script = ExtResource("2_6bm6p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Systems/SpawnManager/Player" unique_id=521254775]
+z_index = 1
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_l5ukw")
-disabled = true
 metadata/_edit_lock_ = true
 
 [node name="Testcharacter" type="Sprite2D" parent="Systems/SpawnManager/Player" unique_id=341964502]
-z_index = 2
+z_index = 1
 texture_filter = 1
 position = Vector2(-1.0000001, -5.0000005)
 scale = Vector2(0.67327964, 0.67327964)
@@ -578,6 +617,22 @@ layout_mode = 2
 texture = ExtResource("11_02kkc")
 stretch_mode = 4
 
+[node name="MarginContainer" type="MarginContainer" parent="HudLayerCanvas/HudRoot" unique_id=1819776683]
+layout_mode = 0
+anchor_left = 0.890625
+anchor_top = 0.050925925
+anchor_right = 0.97256947
+anchor_bottom = 0.1941358
+offset_right = -54.400024
+offset_bottom = -52.799995
+scale = Vector2(2.3600001, 2.3200002)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="HudLayerCanvas/HudRoot/MarginContainer" unique_id=1802429351]
+layout_mode = 2
+horizontal_alignment = 1
+script = ExtResource("14_jgkyn")
+
 [node name="PauseLayerCanvas" type="CanvasLayer" parent="." unique_id=418441936]
 
 [node name="PauseRoot" type="Control" parent="PauseLayerCanvas" unique_id=515936998]
@@ -591,6 +646,8 @@ offset_bottom = 70.0
 [connection signal="input_event" from="World/Levels/Area2D" to="World/Levels/Area2D" method="_on_input_event"]
 [connection signal="input_event" from="World/Levels/Area2D2" to="World/Levels/Area2D2" method="_on_input_event"]
 [connection signal="input_event" from="World/Levels/Area2D3" to="World/Levels/Area2D3" method="_on_input_event"]
+[connection signal="body_entered" from="World/Levels/Area2D4" to="World/Levels/Area2D4" method="_on_body_entered"]
+[connection signal="body_exited" from="World/Levels/Area2D4" to="World/Levels/Area2D4" method="_on_body_exited"]
 [connection signal="timeout" from="Systems/SpawnManager/Cat/Timer" to="Systems/SpawnManager/Cat" method="_on_timer_timeout"]
 [connection signal="gui_input" from="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot" to="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot" method="_on_gui_input"]
 [connection signal="gui_input" from="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot2" to="HudLayerCanvas/HudRoot/InventoryBackground/SlotGrid/InventorySlot2" method="_on_gui_input"]

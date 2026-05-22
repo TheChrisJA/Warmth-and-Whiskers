@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 const SPEED = 50
 const INTERACTION_DISTANCE = 5
@@ -10,9 +11,23 @@ var target_item: Area2D = null
 var pending_placement_position: Vector2 = Vector2.ZERO
 var is_moving_to_place: bool = false
 
+signal heat_changed(new_heat: float)
+
+@export var max_heat: float = 100.0
+@export var min_heat: float = 0.0
+
+var current_heat: float = 100:
+	set(value):
+		current_heat = clamp(value, min_heat, max_heat)
+		heat_changed.emit(current_heat)
+
+var local_heating_bonus: float = 0.0
+
+
 func _ready():
 	nav_agent.path_desired_distance = 4.0
 	nav_agent.target_desired_distance = 4.0
+	add_to_group("player")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -38,7 +53,19 @@ func _unhandled_input(event: InputEvent) -> void:
 func set_movement_target(target_point: Vector2):
 	nav_agent.target_position = target_point
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	# ─── HEAT & TEMPERATURE LOOP ───
+	# Read the world's current base frost level from the global script
+	var environmental_drain = GlobalHeat.environmental_freeze_rate
+	
+	# Combine regional warmth vs global freeze
+	var net_change = local_heating_bonus - environmental_drain
+	
+	# Fix: 'self.' ensures it runs through the custom setter and triggers the UI signal
+	self.current_heat += net_change * delta
+
+
+	# ─── NAVIGATION & MOVEMENT LOOP ───
 	# Check proximity for picking up an item
 	if is_instance_valid(target_item):
 		var distance_to_item = global_position.distance_to(target_item.global_position)
